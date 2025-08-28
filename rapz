@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PAYMENT RAPZ STORE</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+            color: #fff;
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        .cyberpunk-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.15;
+            background: url('https://images.unsplash.com/photo-1468657988500-aca2be09f4c6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80') center/cover no-repeat;
+        }
+
+        .grid-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(rgba(18, 16, 46, 0.7) 1px, transparent 1px),
+                        linear-gradient(90deg, rgba(18, 16, 46, 0.7) 1px, transparent 1px);
+            background-size: 20px 20px;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+            padding: 2rem 0;
+        }
+
+        .logo {
+            font-size: 3.5rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, #ff00cc, #3333ff, #00ccff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 10px rgba(255, 0, 204, 0.5);
+            letter-spacing: 2px;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: #a5a5d8;
+            margin-bottom: 2rem;
+        }
+
+        .payment-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .payment-card {
+            background: rgba(25, 24, 61, 0.7);
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(102, 126, 234, 0.4);
+            box-shadow: 0 0 20px rgba(102, 126, 234, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .payment-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 30px rgba(102, 126, 234, 0.5);
+        }
+
+        .payment-icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            color: #00ccff;
+            text-shadow: 0 0 10px rgba(0, 204, 255, 0.7);
+        }
+
+        .payment-title {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            color: #ff00cc;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .payment-info {
+            background: rgba(15, 14, 41, 0.7);
+            padding: 1.2rem;
+            border-radius: 10px;
+            margin-bottom: 1.5rem;
+            border: 1px solid rgba(255, 0, 204, 0.3);
+        }
+
+        .payment-number {
+            font-size: 1.3rem;
+            letter-spacing: 1px;
+            font-weight: 600;
+            color: #fff;
+            text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+        }
+
+        .payment-copy {
+            background: linear-gradient(45deg, #ff00cc, #3333ff);
+            border: none;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .payment-copy:hover {
+            background: linear-gradient(45deg, #ff33cc, #5555ff);
+            box-shadow: 0 0 10px rgba(255, 0, 204, 0.5);
+        }
+
+        .qris-container {
+            text-align: center;
+            margin-top: 2rem;
+        }
+
+        .qris-image {
+            max-width: 300px;
+            border-radius: 15px;
+            border: 2px solid #00ccff;
+            box-shadow: 0 0 20px rgba(0, 204, 255, 0.5);
+            transition: transform 0.3s ease;
+        }
+
+        .qris-image:hover {
+            transform: scale(1.03);
+        }
+
+        .instructions {
+            background: rgba(25, 24, 61, 0.7);
+            border-radius: 15px;
+            padding: 2rem;
+            margin-top: 3rem;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(102, 126, 234, 0.4);
+        }
+
+        .instructions-title {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            color: #00ccff;
+            text-align: center;
+        }
+
+        .instructions-list {
+            list-style: none;
+        }
+
+        .instructions-list li {
+            margin-bottom: 1rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .instructions-list li:before {
+            content: "➢";
+            color: #ff00cc;
+            position: absolute;
+            left: 0;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 3rem;
+            padding: 2rem 0;
+            color: #a5a5d8;
+            border-top: 1px solid rgba(102, 126, 234, 0.3);
+        }
+
+        .cyberpunk-glitch {
+            position: relative;
+            animation: glitch 5s infinite;
+        }
+
+        @keyframes glitch {
+            0% { text-shadow: 0 0 rgba(255, 0, 0, 0.5), 0 0 rgba(0, 255, 255, 0.5); }
+            50% { text-shadow: -2px 0 rgba(255, 0, 0, 0.5), 2px 0 rgba(0, 255, 255, 0.5); }
+            100% { text-shadow: 0 0 rgba(255, 0, 0, 0.5), 0 0 rgba(0, 255, 255, 0.5); }
+        }
+
+        .scan-line {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 10px;
+            background: linear-gradient(to bottom, rgba(255, 0, 204, 0.7), transparent);
+            animation: scan 3s linear infinite;
+            z-index: 999;
+            pointer-events: none;
+        }
+
+        @keyframes scan {
+            0% { top: 0; }
+            100% { top: 100vh; }
+        }
+
+        @media (max-width: 768px) {
+            .payment-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .logo {
+                font-size: 2.5rem;
+            }
+            
+            .payment-number {
+                font-size: 1.1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="cyberpunk-bg"></div>
+    <div class="grid-overlay"></div>
+    <div class="scan-line"></div>
+
+    <div class="container">
+        <header>
+            <h1 class="logo cyberpunk-glitch">PAYMENT RAPZ STORE</h1>
+            <p class="subtitle">Lakukan pembayaran dengan metode di bawah ini</p>
+        </header>
+
+        <div class="payment-container">
+            <div class="payment-card">
+                <div class="payment-icon">
+                    <i class="fas fa-mobile-alt"></i>
+                </div>
+                <h2 class="payment-title">DANA</h2>
+                <div class="payment-info">
+                    <p class="payment-number">0895-0790-7919</p>
+                </div>
+                <button class="payment-copy" onclick="copyToClipboard('089507907919')">
+                    <i class="fas fa-copy"></i> Salin Nomor
+                </button>
+            </div>
+
+            <div class="payment-card">
+                <div class="payment-icon">
+                    <i class="fab fa-google-wallet"></i>
+                </div>
+                <h2 class="payment-title">GOPAY</h2>
+                <div class="payment-info">
+                    <p class="payment-number">0831-7229-9901</p>
+                </div>
+                <button class="payment-copy" onclick="copyToClipboard('083172299901')">
+                    <i class="fas fa-copy"></i> Salin Nomor
+                </button>
+            </div>
+        </div>
+
+        <div class="qris-container">
+            <h2 class="payment-title">QRIS</h2>
+            <img src="https://files.catbox.moe/9ufaxv.jpg" alt="QRIS Payment" class="qris-image">
+            <p class="subtitle" style="margin-top: 1rem;">Scan QR code untuk pembayaran</p>
+        </div>
+
+        <div class="instructions">
+            <h2 class="instructions-title">Cara Pembayaran</h2>
+            <ul class="instructions-list">
+                <li>Pilih metode pembayaran yang diinginkan (DANA, GOPAY, atau QRIS)</li>
+                <li>Salin nomor atau scan QR code menggunakan aplikasi pembayaran Anda</li>
+                <li>Lakukan transfer sesuai dengan jumlah pembayaran</li>
+                <li>Simpan bukti pembayaran dan kirimkan kepada admin</li>
+                <li>Tunggu konfirmasi dari admin dalam waktu maksimal 1x24 jam</li>
+            </ul>
+        </div>
+
+        <footer>
+            <p>&copy; 2023 RAPZ STORE - All Rights Reserved</p>
+            <p>Contact Admin: <a href="mailto:admin@rapzstore.com" style="color: #00ccff;">admin@rapzstore.com</a></p>
+        </footer>
+    </div>
+
+    <script>
+        function copyToClipboard(text) {
+            const input = document.createElement('input');
+            input.value = text;
+            document.body.appendChild(input);
+            input.select();
+            document.execCommand('copy');
+            document.body.removeChild(input);
+            
+            alert('Nomor berhasil disalin: ' + text);
+        }
+
+        // Efek glitch acak pada latar belakang
+        document.addEventListener('DOMContentLoaded', function() {
+            const bg = document.querySelector('.cyberpunk-bg');
+            setInterval(() => {
+                if (Math.random() > 0.7) {
+                    bg.style.opacity = 0.2 + Math.random() * 0.1;
+                    bg.style.backgroundPosition = `${Math.random() * 20}px ${Math.random() * 20}px`;
+                }
+            }, 300);
+        });
+    </script>
+</body>
+</html>
